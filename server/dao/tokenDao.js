@@ -9,7 +9,7 @@ const client = connexion.client;
 module.exports.createToken = async (token) => {
     const query =
         `
-            INSERT INTO authenticationtoken(value, userId, genesisTime, expiry)
+            INSERT INTO authenticationtoken(value, user_id, genesis_time, expiry)
             VALUES (($1), ($2), ($3), ($4));
         `;
     const values = [token.value, token.userId, token.genesisTime, token.expiry];

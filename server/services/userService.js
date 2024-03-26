@@ -2,7 +2,7 @@ const { User } = require('../database/models/userModel');
 const { ValidationError } = require('../utils/validationErrorClasse');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const userDao = require ("../dao/userDao");
+const userDao = require("../dao/userDao");
 const tokenService = require("./tokenService");
 
 
@@ -69,7 +69,7 @@ module.exports.loginUser = async (request) => {
         if (!isValid) {
             throw new ValidationError('Password is invalid', 400);
         }
-        const token = await tokenService.createToken(data.rows[0].userid);
+        const token = await tokenService.createToken(data.rows[0].user_id);
         return token.value;
     } catch (error) {
         console.error('Error in userService.js', error);

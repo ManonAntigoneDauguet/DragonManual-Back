@@ -13,7 +13,8 @@ module.exports.createToken = async (userId) => {
         await tokenDao.createToken(token);
         return token;
     } catch (error) {
-        throw error;
+        console.error('Error in tokenService.js', error);
+        throw new ValidationError(error, 500);
     }
 }
 
@@ -28,7 +29,6 @@ module.exports.validateToken = async (tokenValue) => {
     if (data.rowCount === 0) {
         throw new ValidationError('Invalid token', 401);
     }
-    console.log(data.rows[0])
     let date = new Date();
     let now = date.getTime();
     if (now >= data.rows[0].expiry) {

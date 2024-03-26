@@ -32,7 +32,7 @@ module.exports.getSpecie = async (specieId) => {
         `
             SELECT * 
             FROM species 
-            WHERE specieId = ($1);
+            WHERE specie_id = ($1);
         `;
     const values = [specieId];
     const data = await client.query(query, values);

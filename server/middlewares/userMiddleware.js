@@ -114,7 +114,7 @@ module.exports.getUserProfile = async (request, res) => {
         checkFieldValid('Access token is missing or invalid', request.headers.authorization, /^Bearer (\d+)$/);
         request.headers.token = request.headers.authorization.substring(7);
         userController.getUserProfile(request.headers, res);
-    } catch {
+    } catch (error) {
         console.error('Error in speciesMiddleware.js : access token is missing or invalid');
         res.writeHead(401);
         res.write('Access token is missing or invalid');

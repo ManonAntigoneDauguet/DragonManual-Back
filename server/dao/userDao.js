@@ -11,7 +11,7 @@ const client = connexion.client;
 module.exports.getUsers = async (limit, offset) => {
     const query =
         `
-            SELECT firstName, lastName 
+            SELECT first_name, last_name 
             FROM users 
             LIMIT ($1) 
             OFFSET ($2);
@@ -33,7 +33,7 @@ module.exports.getUsers = async (limit, offset) => {
 module.exports.createUser = async (request) => {
     const query =
         `
-            INSERT INTO users(firstName, lastName, email, password, permissionLevel)
+            INSERT INTO users(first_name, last_name, email, password, permission_level)
             VALUES (($1), ($2), ($3), ($4), 'public');
         `;
     const values = [request.firstName, request.lastName, request.email, request.hashPassword];
@@ -67,10 +67,10 @@ module.exports.checkEmailAlreadyExists = async (email) => {
 module.exports.getUserProfile = async (tokenValue) => {
     const query =
         `
-            SELECT firstName, lastName, email, password 
+            SELECT first_name, last_name, email, password 
             FROM users 
             RIGHT OUTER JOIN authenticationtoken 
-            ON users.userId = authenticationtoken.userId
+            ON users.user_id = authenticationtoken.user_id
             WHERE authenticationtoken.value = ($1);
         `;
     const values = [tokenValue];

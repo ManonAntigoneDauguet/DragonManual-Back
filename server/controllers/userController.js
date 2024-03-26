@@ -17,7 +17,7 @@ module.exports.getUsers = async (request, res) => {
         res.writeHead(200, 'Users retrieved successully');
         res.write(JSON.stringify({ data: data.rows }));
         res.end("\n");
-    } catch {
+    } catch (error) {
         console.error('Error in userController.js', error);
         if (error instanceof ValidationError) {
             res.writeHead(error.code);
