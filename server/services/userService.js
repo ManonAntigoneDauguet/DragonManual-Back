@@ -1,5 +1,5 @@
 const { User } = require('../database/models/userModel');
-const { ValidationError } = require('../utils/validationErrorClasse');
+const { ValidationError } = require('../errorAdministrator/validationErrorClasse');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const userDao = require("../dao/userDao");
@@ -18,7 +18,7 @@ module.exports.getUsers = async (limit, offset) => {
         return data;
     } catch (error) {
         console.error('Error in userService.js', error);
-        throw new ValidationError(error, 500);
+        throw error;
     }
 }
 

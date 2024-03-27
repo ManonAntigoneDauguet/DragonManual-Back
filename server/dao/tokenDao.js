@@ -13,7 +13,7 @@ module.exports.createToken = async (token) => {
             VALUES (($1), ($2), ($3), ($4));
         `;
     const values = [token.value, token.userId, token.genesisTime, token.expiry];
-    client.query(query, values);
+    await client.query(query, values);
 }
 
 
@@ -46,5 +46,5 @@ module.exports.deleteToken = async (tokenValue) => {
             WHERE value = ($1);
         `;
     const values = [tokenValue];
-    client.query(query, values);
+    await client.query(query, values);
 }

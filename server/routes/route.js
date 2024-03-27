@@ -8,7 +8,7 @@ const handlers = {
             speciesMiddleware.getSpecies(data, res);
         } else {
             res.writeHead(400);
-            res.write("bad request");
+            res.write("Bad request");
             res.end("\n");
         }
     },
@@ -17,7 +17,7 @@ const handlers = {
             speciesMiddleware.getSpecie(data, res);
         } else {
             res.writeHead(400);
-            res.write("bad request");
+            res.write("Bad request");
             res.end("\n");
         }
     },
@@ -28,7 +28,7 @@ const handlers = {
             userMiddleware.createUser(data, res)
         } else {
             res.writeHead(400);
-            res.write("bad request");
+            res.write("Bad request");
             res.end("\n");
         }
     },
@@ -37,7 +37,7 @@ const handlers = {
             userMiddleware.loginUser(data, res)
         } else {
             res.writeHead(400);
-            res.write("bad request");
+            res.write("Bad request");
             res.end("\n");
         }
     },
@@ -46,7 +46,7 @@ const handlers = {
             userMiddleware.getUserProfile(data, res)
         } else {
             res.writeHead(400);
-            res.write("bad request");
+            res.write("Bad request");
             res.end("\n");
         }
     },
