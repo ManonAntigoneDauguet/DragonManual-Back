@@ -67,7 +67,7 @@ exports.up = (pgm) => {
         },
         breath1: {
             type: 'varchar(100)',
-            not,Null: true
+            notNull: true
         },
         breath2: {
             type: 'varchar(100)',
