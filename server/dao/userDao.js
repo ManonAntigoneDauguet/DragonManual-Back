@@ -37,7 +37,7 @@ module.exports.createUser = async (request) => {
             VALUES (($1), ($2), ($3), ($4), 'public');
         `;
     const values = [request.firstName, request.lastName, request.email, request.hashPassword];
-    client.query(query, values);
+    await client.query(query, values);
 }
 
 
