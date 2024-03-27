@@ -1,4 +1,4 @@
-const { ValidationError } = require('../utils/validationErrorClasse');
+const { controllerErrorService } = require('../errorAdministrator/controllerErrorService');
 const userService = require('../services/userService');
 const tokenService = require('../services/tokenService');
 
@@ -18,16 +18,7 @@ module.exports.getUsers = async (request, res) => {
         res.write(JSON.stringify({ data: data.rows }));
         res.end("\n");
     } catch (error) {
-        console.error('Error in userController.js', error);
-        if (error instanceof ValidationError) {
-            res.writeHead(error.code);
-            res.write(error.message);
-            res.end("\n");
-        } else {
-            res.writeHead(500);
-            res.write('Internal error');
-            res.end("\n");
-        }
+        controllerErrorService(res, error, "userController.js");
     }
 }
 
@@ -47,16 +38,7 @@ module.exports.createUser = async (request, res) => {
         res.write('User successfully created');
         res.end("\n");
     } catch (error) {
-        console.error('Error in userController.js', error);
-        if (error instanceof ValidationError) {
-            res.writeHead(error.code);
-            res.write(error.message);
-            res.end("\n");
-        } else {
-            res.writeHead(500);
-            res.write('Internal error');
-            res.end("\n");
-        }
+        controllerErrorService(res, error, "userController.js");
     }
 }
 
@@ -75,16 +57,7 @@ module.exports.loginUser = async (request, res) => {
         res.write(JSON.stringify(token));
         res.end("\n");
     } catch (error) {
-        console.error('Error in userController.js', error);
-        if (error instanceof ValidationError) {
-            res.writeHead(error.code);
-            res.write(error.message);
-            res.end("\n");
-        } else {
-            res.writeHead(500);
-            res.write('Internal Server Error');
-            res.end("\n");
-        }
+        controllerErrorService(res, error, "userController.js");
     }
 }
 
@@ -104,15 +77,6 @@ module.exports.getUserProfile = async (request, res) => {
         res.write(JSON.stringify({ data: data.rows }));
         res.end("\n");
     } catch (error) {
-        console.error('Error in userController.js', error);
-        if (error instanceof ValidationError) {
-            res.writeHead(error.code);
-            res.write(error.message);
-            res.end("\n");
-        } else {
-            res.writeHead(500);
-            res.write('Internal error');
-            res.end("\n");
-        }
+        controllerErrorService(res, error, "userController.js");
     }
 }

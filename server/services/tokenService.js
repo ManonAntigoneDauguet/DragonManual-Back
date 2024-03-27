@@ -1,4 +1,4 @@
-const { ValidationError } = require('../utils/validationErrorClasse');
+const { ValidationError } = require('../errorAdministrator/validationErrorClasse');
 const { Token } = require('../database/models/tokenModel');
 const tokenDao = require("../dao/tokenDao");
 
@@ -14,7 +14,7 @@ module.exports.createToken = async (userId) => {
         return token;
     } catch (error) {
         console.error('Error in tokenService.js', error);
-        throw new ValidationError(error, 500);
+        throw error;
     }
 }
 
