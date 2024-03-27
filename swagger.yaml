@@ -1,0 +1,559 @@
+openapi: 3.0.3
+info:
+  title: Dreamworks Dragons API
+  description: |-
+    Simple API allowing the user to know the different dragons of the Dreamworks univers, and create his own dragon and dragon rider.
+    
+  termsOfService: http://swagger.io/terms/
+  version: 1.0.1
+servers:
+  - url: http://localhost:3001/api/v1
+tags:
+  - name: Species Module
+    description: Everything about the dragon species
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: Dragons Module
+    description: Everything about the dragon characters
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: Users Module
+    description: Everything about the dragon riders
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+      
+paths:
+  /species:
+    get:
+      tags:
+        - Species Module
+      summary: Return all species
+      description: Return all species of dragons
+      operationId: getSpecies
+      parameters:
+        - name: limit
+          in: header
+          description: The index limit from which to return data
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: header
+          description: The index limit up to which to send data
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Species retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Species'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Species'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Error
+  /species/{specieId}:
+    get:
+      tags:
+        - Species Module
+      summary: Return the specie
+      description: Return all informations of the specified specie
+      operationId: getSpecie
+      parameters:
+        - name: specieId
+          in: path
+          description: The ID of the specie to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Specie retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Specie'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Specie'
+        '404':
+          description: Specie not found
+        '500':
+          description: Internal Error
+  /dragons:
+    get:
+      tags:
+        - Dragons Module
+      summary: Return all dragon characters
+      description: Return all dragon characters
+      operationId: getDragonCharacters
+      parameters:
+        - name: limit
+          in: header
+          description: The index limit from which to return data
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: header
+          description: The index limit up to which to send data
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Characters retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DragonCharacters'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DragonCharacters'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Error
+    post:
+      tags:
+        - Dragons Module
+      summary: Add a dragon character
+      description: Add a dragon character
+      operationId: addDragonCharacter
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dragon updated successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DragonToAdd'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DragonToAdd'
+        '400':
+          description: Invalid Fields
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Error
+      security:
+        - bearerAuth: []
+  /dragons/{dragonId}:
+    get:
+      tags:
+        - Dragons Module
+      summary: Return the dragon character
+      description: Return all informations about the dragon character
+      operationId: getDragonCharacter
+      parameters:
+        - name: dragonId
+          in: path
+          description: The ID of the character to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Characters retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DragonCharacter'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DragonCharacter'
+        '404':
+          description: Dragon not found
+        '500':
+          description: Internal Error
+    put:
+      tags:
+        - Dragons Module
+      summary: Update the dragon character
+      description: Change informations about the dragon character
+      operationId: updateDragonCharacter
+      parameters:
+        - name: dragonId
+          in: path
+          description: The ID of the character to return
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dragon updated successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DragonToAdd'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DragonToAdd'
+        '400':
+          description: Invalid Fields
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Dragon not found
+        '500':
+          description: Internal Error
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Dragons Module
+      summary: Delete the dragon character
+      description: Delete the dragon character
+      operationId: deleteDragonCharacter
+      parameters:
+        - name: dragonId
+          in: path
+          description: The ID of the character to return
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dragon deleted successully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Dragon not found
+        '500':
+          description: Internal Error
+      security:
+        - bearerAuth: []
+  /users:
+    get:
+      tags:
+        - Users Module
+      summary: Return all users
+      description: Return all users
+      operationId: getUsers
+      parameters:
+        - name: limit
+          in: header
+          description: The index limit from which to return data
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: header
+          description: The index limit up to which to send data
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Users retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Error
+    post:
+      tags:
+        - Users Module
+      summary: Create a user
+      description: Create a user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPayload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserPayload'
+        required: true  
+      responses:
+        '200':
+          description: User updated successully
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Error
+  /users/user/login:
+    post:
+      tags:
+        - Users Module
+      summary: Login
+      description: Login the user
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPayload'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserPayload'
+        required: true      
+      responses:
+        '200':
+          description: User successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Error
+  /users/user/profile:
+    post:
+      tags:
+        - Users Module
+      summary: Return the user
+      description: Return all informations about the user
+      operationId: getUserProfile
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Character retrieved successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Error
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - Users Module
+      summary: Update the user
+      description: Change informations about the user
+      operationId: updateUser
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResume'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UserResume'
+        required: true
+      responses:
+        '200':
+          description: User updated successully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: Invalid Fields
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Error
+      security:
+        - bearerAuth: []
+        
+components:
+  schemas:
+    Species:
+      type: array
+      items:
+        $ref: '#/components/schemas/Specie'
+      xml:
+        name: species
+    Specie:
+      type: object
+      properties:
+        specieId:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Gronk
+        class:
+          type: string
+          enum:
+            - boulder
+            - mystery
+            - sharp
+            - stoker
+            - strike
+            - tidal
+            - tracker
+      xml:
+        name: specie
+    DragonCharacters:
+      type: array
+      items:
+        $ref: '#/components/schemas/DragonCharacter'
+      xml:
+        name: dragonCharacters
+    DragonCharacter:
+      type: object
+      properties:
+        dragonId:
+          type: integer
+          example: 8349
+        name:
+          type: string
+          example: Krochefer
+        specie:
+          type: string
+          example: Cauchemar Monstrueux
+      xml:
+        name: dragonCharacter
+    DragonToAdd:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Krochefer
+        specie:
+          type: string
+          example: Cauchemar Monstrueux
+      xml:
+        name: dragonToAdd
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserResume'
+      xml:
+        name: users
+    UserProfile:
+      type: object
+      properties:
+        email:
+          type: string
+          example: rustik@test.com
+        password:
+          type: string
+          example: password123
+        firstName:
+          type: string
+          example: Rustik
+        lastName:
+          type: string
+          example: Jorgenson
+      xml:
+        name: user
+    UserResume:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Rustik
+        lastName:
+          type: string
+          example: Jorgenson
+      xml:
+        name: userResume
+    UserPayload:
+      type: object
+      properties:
+        email:
+          type: string
+          example: rustik@test.com
+        password:
+          type: string
+          example: password123
+      xml:
+        name: userPayload
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+      xml:
+        name: userPayload
+    LimitEntries:
+      type: object
+      properties:
+        limit:
+          type: integer
+          default: 10
+        offset:
+          type: integer
+          default: 0
+
+  requestBodies:
+    LimitEntries:
+      description: number of entries you want to display
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LimitEntries'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/LimitEntries'
+    DragonToAdd:
+      description: Dragon object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DragonToAdd'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/DragonToAdd'
+
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
