@@ -1,4 +1,4 @@
-const { ValidationError } = require('../utils/validationErrorClasse');
+const { controllerErrorService } = require('../errorAdministrator/controllerErrorService');
 const speciesService = require("../services/speciesService");
 
 
@@ -17,16 +17,7 @@ module.exports.getSpecies = async (request, res) => {
         res.write(JSON.stringify({ data: data.rows }));
         res.end("\n");
     } catch (error) {
-        console.error('Error in speciesController.js', error);
-        if (error instanceof ValidationError) {
-            res.writeHead(error.code);
-            res.write(error.message);
-            res.end("\n");
-        } else {
-            res.writeHead(500);
-            res.write('Internal error');
-            res.end("\n");
-        }
+        controllerErrorService(res, error, "speciesController.js");
     }
 }
 
@@ -44,15 +35,6 @@ module.exports.getSpecie = async (specieId, res) => {
         res.write(JSON.stringify({ data: data.rows }));
         res.end("\n");
     } catch (error) {
-        console.error('Error in speciesController.js', error);
-        if (error instanceof ValidationError) {
-            res.writeHead(error.code);
-            res.write(error.message);
-            res.end("\n");
-        } else {
-            res.writeHead(500);
-            res.write('Internal error');
-            res.end("\n");
-        }
+        controllerErrorService(res, error, "speciesController.js");
     }
 }

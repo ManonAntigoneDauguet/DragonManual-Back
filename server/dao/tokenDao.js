@@ -9,11 +9,11 @@ const client = connexion.client;
 module.exports.createToken = async (token) => {
     const query =
         `
-            INSERT INTO authenticationtoken(value, user_id, genesis_time, expiry)
+            INSERT INTO authenticationtoken(value, user_id, created_at, expiry)
             VALUES (($1), ($2), ($3), ($4));
         `;
-    const values = [token.value, token.userId, token.genesisTime, token.expiry];
-    client.query(query, values);
+    const values = [token.value, token.userId, token.createdAt, token.expiry];
+    await client.query(query, values);
 }
 
 
@@ -46,5 +46,5 @@ module.exports.deleteToken = async (tokenValue) => {
             WHERE value = ($1);
         `;
     const values = [tokenValue];
-    client.query(query, values);
+    await client.query(query, values);
 }

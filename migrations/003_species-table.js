@@ -7,11 +7,11 @@ exports.up = (pgm) => {
         },
         name: {
             type: 'varchar(100)',
-            notNull: true
+            notNull: false
         },
         classification1: {
             type: 'varchar(100)',
-            notNull: true
+            notNull: false
         },
         classification2: {
             type: 'varchar(100)',
@@ -66,11 +66,11 @@ exports.up = (pgm) => {
             notNull: true
         },
         breath1: {
-            type: 'varchar(100)',
+            type: 'varchar(128)',
             notNull: true
         },
         breath2: {
-            type: 'varchar(100)',
+            type: 'varchar(128)',
             notNull: false
         },
         breath_description: {

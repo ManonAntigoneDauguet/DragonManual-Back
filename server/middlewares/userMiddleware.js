@@ -27,8 +27,8 @@ const fields = [
 /**
  * Configure the response to the user to return a list of users
  * @param { Object } request 
- * @param { Number } [request.headers.limit] 
- * @param { Number } [request.headers.offset]
+ * @param { Number } [request.headers.limit] as the max number of users to return
+ * @param { Number } [request.headers.offset] as the index to start searching from
  * @param { Object } res
  */
 module.exports.getUsers = async (request, res) => {
@@ -37,7 +37,7 @@ module.exports.getUsers = async (request, res) => {
     if (isCorrectNumber(request.headers.limit) && isCorrectNumber(request.headers.offset)) {
         userController.getUsers(request.headers, res);
     } else {
-        console.error('Error in speciesMiddleware.js : limit and offset must be valid numbers');
+        console.error('Error in userMiddleware.js : limit and offset must be valid numbers');
         res.writeHead(400);
         res.write('Invalid Fields : limit and offset must be valid numbers');
         res.end("\n");

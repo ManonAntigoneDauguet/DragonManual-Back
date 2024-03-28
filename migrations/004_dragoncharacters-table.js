@@ -15,15 +15,27 @@ exports.up = (pgm) => {
             references: 'users(user_id)',
             onDelete: 'cascade'
         },
+        rider_name: {
+            type: 'varchar(100)',
+            notNull: false
+        },
         specie_id: {
             type: 'integer',
             notNull: false,
             references: 'species(specie_id)',
             onDelete: 'cascade'
         },
+        specie: {
+            type: 'varchar(100)',
+            notNull: false
+        },
+        description: {
+            type: 'text',
+            notNull: false
+        },
         created_at: {
             type: 'timestamp',
-            notNull: true,
+            notNull: false,
             default: pgm.func('current_timestamp'),
         }
     });

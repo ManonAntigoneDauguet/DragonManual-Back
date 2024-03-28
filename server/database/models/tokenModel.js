@@ -10,8 +10,8 @@ class Token {
     constructor(userId) {
         this._userId = userId;
         this._value = Math.floor(Math.random() * 100000);
-        this._genesisTime = new Date();
-        this._expiry = this._genesisTime.getTime() + 1 * 60*60*1000;
+        this._createdAt = new Date();
+        this._expiry = this._createdAt.getTime() + 1 * 60*60*1000;
     }
 
     get value() {
@@ -22,8 +22,8 @@ class Token {
         return this._userId;
     }
 
-    get genesisTime() {
-        return this._genesisTime;
+    get createdAt() {
+        return this._createdAt;
     }
 
     get expiry() {

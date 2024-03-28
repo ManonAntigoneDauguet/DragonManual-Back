@@ -1,4 +1,4 @@
-const { ValidationError } = require('../utils/validationErrorClasse');
+const { ValidationError } = require('../errorAdministrator/validationErrorClasse');
 const speciesDao = require("../dao/speciesDao");
 
 
@@ -14,7 +14,7 @@ module.exports.getSpecies = async (limit, offset) => {
         return data;
     } catch (error) {
         console.error('Error in speciesService.js', error);
-        throw new ValidationError(error, 500);
+        throw error;
     }
 }
 
