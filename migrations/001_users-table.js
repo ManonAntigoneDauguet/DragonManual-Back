@@ -6,11 +6,11 @@ exports.up = (pgm) => {
             notNull: true
         },
         first_name: {
-            type: 'varchar(100)',
+            type: 'varchar(50)',
             notNull: true
         },
         last_name: {
-            type: 'varchar(100)',
+            type: 'varchar(50)',
             notNull: true
         },
         email: {
@@ -23,12 +23,13 @@ exports.up = (pgm) => {
         },
         created_at: {
             type: 'timestamp',
-            notNull: true,
+            notNull: false,
             default: pgm.func('current_timestamp'),
         },
         permission_level: {
             type: 'varchar(100)',
-            notNull: false
+            notNull: false,
+            default: 'public'
         },
     });
 };
