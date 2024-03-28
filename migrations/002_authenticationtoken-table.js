@@ -10,7 +10,7 @@ exports.up = (pgm) => {
             references: 'users(user_id)',
             onDelete: 'cascade'
         },
-        genesis_time: {
+        created_at: {
             type: 'timestamp',
             notNull: true
         },

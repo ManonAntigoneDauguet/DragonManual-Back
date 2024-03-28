@@ -5,8 +5,8 @@ const { isCorrectNumber } = require("../utils/validationFunctions");
 /**
  * Configure the response to the user return a list of species
  * @param { Object } request 
- * @param { Number } [request.headers.limit] 
- * @param { Number } [request.headers.offset] 
+ * @param { Number } [request.headers.limit] as the max number of species to return
+ * @param { Number } [request.headers.offset] as the index to start searching from
  * @param { Object } res
  */
 module.exports.getSpecies = async (request, res) => {
