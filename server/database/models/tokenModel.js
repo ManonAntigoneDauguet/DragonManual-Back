@@ -9,7 +9,7 @@ class Token {
      */
     constructor(userId) {
         this._userId = userId;
-        this._value = Math.floor(Math.random() * 100000);
+        this._value = Math.floor(Math.random() * 1000000000000);
         this._createdAt = new Date();
         this._expiry = this._createdAt.getTime() + 1 * 60*60*1000;
     }

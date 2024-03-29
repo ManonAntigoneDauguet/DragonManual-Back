@@ -1,8 +1,8 @@
 # Db documentation
 
-This project use a database with several table.
-Here, more informations are done for each table and the general functioning of the database.
-_ Remarque _ : by default the columns can't be null.
+This project use a database with several table.   
+Here, more informations are done for each table and the general functioning of the database.   
+_Remarque_ : by default the columns can't be null.
 
 ---
 
@@ -29,7 +29,7 @@ The database schema is available at this link : [dbSchema](./dbSchema.png).
 
 ### 2.1 description
 
-This table contains all the user already created.
+This table contains all the user already created.   
 With this table, a user can create, login and edit a profile.
 
 ### 2.2 columns
@@ -53,10 +53,10 @@ The **user_id** is used by the foreign key **user_id** of the authenticationtoke
 
 ### 3.1 description
 
-This table contains all the token already created.
-A token allow to know if a user is connected.
-A connected user can view and edit his profile, and can create his dragon character.
-After a time (1h for now), the token is invalid and the user have to login again.
+This table contains all the token already created.   
+A token allow to know if a user is connected.   
+A connected user can view and edit his profile, and can create his dragon character.   
+After a time (1h for now), the token is invalid and the user have to login again.   
 
 ### 3.2 columns
 
@@ -67,7 +67,7 @@ After a time (1h for now), the token is invalid and the user have to login again
 
 ### 3.3 extra contraints
 
-The **user_id** is a foreign key for the users table (**user_id**).
+The **user_id** is a foreign key for the users table (**user_id**).   
 After a time (24h for now), the token is deleted from the table.
 
 ---
@@ -77,8 +77,8 @@ After a time (24h for now), the token is deleted from the table.
 
 ### 4.1 description
 
-This table contains all the dragon characters already created.
-A connected user can create, edit and delete his dragon.
+This table contains all the dragon characters already created.   
+A connected user can create, edit and delete his dragon.   
 
 ### 4.2 columns
 
@@ -93,9 +93,9 @@ A connected user can create, edit and delete his dragon.
 
 ### 4.3 extra contraints
 
-The **rider_id** is a foreign key for the users table (**user_id**).
-The **specie_id** is a foreign key for the species table (**specie_id**).
-After a time (1 day for now), a dragon character without **rider_id** is deleted from the table.
+The **rider_id** is a foreign key for the users table (**user_id**).   
+The **specie_id** is a foreign key for the species table (**specie_id**).   
+After a time (1 day for now), a dragon character without **rider_id** is deleted from the table.   
 
 ---
 
@@ -104,10 +104,10 @@ After a time (1 day for now), a dragon character without **rider_id** is deleted
 
 ### 5.1 description
 
-This table contains all the dragon species saved.
-If you want to populate the database with the `npm run fill-db` command as sayed in the [README.md](./README.md), so the species belong to the Dreamworks universe.
-With this table, a user can to have different informations about these species.
-This table is, at the origin, created to a quiz allowing the user to know his perfect specie to adopt !
+This table contains all the dragon species saved.   
+If you want to populate the database with the `npm run fill-db` command as sayed in the [README.md](./README.md), so the species belong to the Dreamworks universe.   
+With this table, a user can to have different informations about these species.   
+This table is, at the origin, created to a quiz allowing the user to know his perfect specie to adopt !   
 
 ### 5.2 columns
 
@@ -135,32 +135,32 @@ Boolean columns :
  - **sedentary** : it's true if the specie is adaptable to multiple activities, including napping, and false for a dragon of a very energetic nature with high sporting needs, such as 'furies'.
 
 Integer columns :
- - **rare** : it's a value linked to rarity of the specie.
- '1' : common, which can be found almost everywhere, in almost every hive, appears regularly in films and series.
- '2' : uncommon, especially those from derivative games.
- '3' : rare, very rare and extinct, which we only come across once in series and films or almost.
+ - **rare** : it's a value linked to rarity of the specie.   
+ '1' : common, which can be found almost everywhere, in almost every hive, appears regularly in films and series.   
+ '2' : uncommon, especially those from derivative games.   
+ '3' : rare, very rare and extinct, which we only come across once in series and films or almost.   
 
- - **difficulty** : it's a value linked to train difficulty.
- '1' : easy
- '2' : intermediate
- '3' : high difficulty.
+ - **difficulty** : it's a value linked to train difficulty.   
+ '1' : easy   
+ '2' : intermediate   
+ '3' : high difficulty.   
 
- - **sociability**: it's a value linked to the dragon's sociability with other species of dragons.
- '1' : very unsociable, typically predators of dragons, who should not or cannot live among others, such as the 'ébouillantueur' or the 'écrevasse'.  These species are easily a danger in a hive, and are unhappy in a hive.
- '2' : not very sociable, typically those who like to live isolated from hives, very shy or aggressive species, but which can be integrated into a small group without harming the safety of individuals, like the 'vélocidard' or the 'razolame'.  These species are uncomfortable in hives.
- '3' : sociable species, typically species found both alone and in groups, as the 'mille tonnerres'.
+ - **sociability**: it's a value linked to the dragon's sociability with other species of dragons.   
+ '1' : very unsociable, typically predators of dragons, who should not or cannot live among others, such as the 'ébouillantueur' or the 'écrevasse'.  These species are easily a danger in a hive, and are unhappy in a hive.   
+ '2' : not very sociable, typically those who like to live isolated from hives, very shy or aggressive species, but which can be integrated into a small group without harming the safety of individuals, like the 'vélocidard' or the 'razolame'.  These species are uncomfortable in hives.   
+ '3' : sociable species, typically species found both alone and in groups, as the 'mille tonnerres'.   
  '4' : very sociable species, which need to be surrounded to be happy, like 'gronks'.
 
- - **petfriendly** : it's a value linked to compatibility with other pets.
- '1' : species dangerous to other animals, typically very nervous dragons, which attack everything, such as the 'murmure mortel', or even large predators such as the 'ébouillantueur'.
- '2' : species that can be trained to welcome the company of an occasional animal.
- '3' : easily compatible species, either basic or through simple training, such as the 'furie noctune'.
+ - **petfriendly** : it's a value linked to compatibility with other pets.   
+ '1' : species dangerous to other animals, typically very nervous dragons, which attack everything, such as the 'murmure mortel', or even large predators such as the 'ébouillantueur'.   
+ '2' : species that can be trained to welcome the company of an occasional animal.   
+ '3' : easily compatible species, either basic or through simple training, such as the 'furie noctune'.   
 
- - **needwater** : it's a integer value linked to the water dependence of the species and mainly concerns marine dragons.
- '1' : low need.
- '2' : the dragon needs ponds and rivers to immerse itself in but not necessarily more.
- '3' : the dragon needs deep pools of water to live.
- '4' : dragon only evolves in an aquatic environment.
+ - **needwater** : it's a integer value linked to the water dependence of the species and mainly concerns marine dragons.   
+ '1' : low need.   
+ '2' : the dragon needs ponds and rivers to immerse itself in but not necessarily more.   
+ '3' : the dragon needs deep pools of water to live.   
+ '4' : dragon only evolves in an aquatic environment.   
 
 ### 5.3 extra contraints
 

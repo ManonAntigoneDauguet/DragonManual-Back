@@ -8,14 +8,24 @@ const tokenDao = require("../dao/tokenDao");
  * @param { Integer } userId 
  */
 module.exports.createToken = async (userId) => {
-    const token = new Token(userId);
-    try {
-        await tokenDao.createToken(token);
-        return token;
-    } catch (error) {
-        console.error('Error in tokenService.js', error);
-        throw error;
+    const maxIterations = 10;
+    let iteration = 0;
+
+    while (iteration++ <= maxIterations) {
+        const token = new Token(userId);
+        try {
+            await tokenDao.createToken(token);
+            return token;
+        } catch (error) {
+            if (error.code === "23505") { // The token value already exist in the db
+                iteration++;
+            } else {
+                console.error('Error in tokenService.js', error);
+                throw error;
+            }
+        }
     }
+    console.log("Error in tokenService.js : too many loops to create a new unique token.");
 }
 
 

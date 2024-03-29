@@ -19,6 +19,7 @@ exports.up = (pgm) => {
             notNull: true
         }
     });
+    pgm.addConstraint('authenticationtoken', 'unique_value_constraint', { unique: 'value' });
 };
 
 exports.down = (pgm) => {
