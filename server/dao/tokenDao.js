@@ -48,3 +48,15 @@ module.exports.deleteToken = async (tokenValue) => {
     const values = [tokenValue];
     await client.query(query, values);
 }
+
+
+module.exports.extendValidity = async (tokenValue, newExpiry) => {
+    const query =
+        `
+            UPDATE authenticationtoken
+            SET expiry = ($1)
+            WHERE value = ($2);
+        `;
+    const values = [newExpiry, tokenValue];
+    await client.query(query, values);
+}

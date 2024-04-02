@@ -30,7 +30,8 @@ module.exports.createToken = async (userId) => {
 
 
 /**
- * Return an error if the token is expired or invalid
+ * Return an error if the token is expired or invalid,
+ * Extend the validity of a valid token.
  * @param { Object } tokenValue
  * @param { Integer } userId 
  */
@@ -44,5 +45,8 @@ module.exports.validateToken = async (tokenValue) => {
     if (now >= data.rows[0].expiry) {
         await tokenDao.deleteToken(tokenValue);
         throw new ValidationError('Expired session, please login again', 401);
+    } else {
+        const newExpiry = now + 1 * 60*60*1000;
+        await tokenDao.extendValidity(tokenValue, newExpiry);
     }
 }
