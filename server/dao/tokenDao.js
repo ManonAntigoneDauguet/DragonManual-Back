@@ -50,6 +50,11 @@ module.exports.deleteToken = async (tokenValue) => {
 }
 
 
+/**
+ * Extend the validity of a valid token
+ * @param { String } tokenValue 
+ * @param { String } newExpiry as a Unix timestamp value
+ */
 module.exports.extendValidity = async (tokenValue, newExpiry) => {
     const query =
         `
@@ -59,4 +64,19 @@ module.exports.extendValidity = async (tokenValue, newExpiry) => {
         `;
     const values = [newExpiry, tokenValue];
     await client.query(query, values);
+}
+
+
+/**
+ * Clean the authenticationtoken table with the specified script in....
+ * @param {*} tokenValue 
+ * @param {*} newExpiry 
+ */
+module.exports.extendValidity = async () => {
+    const query =
+        `
+            SELECT * 
+            FROM authenticationtoken;
+        `;
+    await client.query(query);
 }
